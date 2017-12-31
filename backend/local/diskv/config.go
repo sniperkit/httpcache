@@ -3,7 +3,7 @@ package diskvcache
 import (
 	"github.com/jinzhu/configor"
 	"github.com/k0kubun/pp"
-	"github.com/sniperkit/configer"
+	"github.com/sniperkit/config"
 	"github.com/sniperkit/httpcache/pkg"
 	"github.com/sniperkit/vipertags"
 )

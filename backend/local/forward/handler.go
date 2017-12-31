@@ -33,6 +33,7 @@ limitations under the License.
 
 package forwardcache
 
+/*
 import (
 	"hash/crc32"
 	"net/http"
@@ -215,3 +216,4 @@ func clone(r *http.Request) *http.Request {
 	}
 	return r2
 }
+*/

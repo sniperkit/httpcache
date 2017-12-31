@@ -5,8 +5,8 @@ import (
 
 	"github.com/going/toolkit/log"
 	"github.com/peterbourgon/diskv"
-	"github.com/sniperkit/cache/plugins/diskv"
-	"github.com/sniperkit/cache/plugins/diskv/s3/s3cache"
+	"github.com/sniperkit/httpcache/backend/diskv"
+	"github.com/sniperkit/httpcache/backend/diskv/s3/s3cache"
 	// "github.com/sniperkit/cache/helpers"
 )
 

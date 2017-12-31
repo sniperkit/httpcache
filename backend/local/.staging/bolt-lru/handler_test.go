@@ -6,7 +6,7 @@ import (
 	"os"
 	"path"
 	"testing"
-	// "github.com/sniperkit/cache/plugins/bolt-lru"
+	// "github.com/sniperkit/httpcache/backend/local/bolt-lru"
 )
 
 func TestLRU(t *testing.T) {

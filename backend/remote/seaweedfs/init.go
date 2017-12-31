@@ -2,7 +2,7 @@ package seaweedfscache
 
 /*
 import (
-	"github.com/sniperkit/configer"
+	"github.com/sniperkit/config"
 	"github.com/sniperkit/logger"
 )
 
