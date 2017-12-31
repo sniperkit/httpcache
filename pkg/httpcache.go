@@ -25,7 +25,6 @@ const (
 	transparent
 	// XFromCache is the header added to responses that are returned from the cache
 	XFromCache = "X-From-Cache"
-	XCacheAge
 )
 
 // A Cache interface is used by the Transport to store and retrieve responses.
