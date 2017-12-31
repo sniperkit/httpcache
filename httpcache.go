@@ -36,6 +36,8 @@ type Cache interface {
 	Set(key string, responseBytes []byte)
 	// Delete removes the value associated with the key
 	Delete(key string)
+	Debug(action string)
+	Action(name string, args ...interface{}) (map[string]*interface{}, error)
 }
 
 // cacheKey returns the cache key for req.
@@ -85,6 +87,11 @@ func (c *MemoryCache) Delete(key string) {
 	c.mu.Lock()
 	delete(c.items, key)
 	c.mu.Unlock()
+}
+
+func (c *MemoryCache) Debug(action string) {}
+func (c *MemoryCache) Action(name string, args ...interface{}) (map[string]*interface{}, error) {
+	return nil, errors.New("Action not implemented yet")
 }
 
 // NewMemoryCache returns a new Cache that will store items in an in-memory map

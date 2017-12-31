@@ -7,8 +7,10 @@ import (
 	"bytes"
 	"crypto/md5"
 	"encoding/hex"
-	"github.com/peterbourgon/diskv"
+	"errors"
 	"io"
+
+	"github.com/peterbourgon/diskv"
 )
 
 // Cache is an implementation of httpcache.Cache that supplements the in-memory map with persistent storage
@@ -36,6 +38,11 @@ func (c *Cache) Set(key string, resp []byte) {
 func (c *Cache) Delete(key string) {
 	key = keyToFilename(key)
 	c.d.Erase(key)
+}
+
+func (c *Cache) Debug(action string) {}
+func (c *Cache) Action(name string, args ...interface{}) (map[string]*interface{}, error) {
+	return nil, errors.New("Action not implemented yet")
 }
 
 func keyToFilename(key string) string {

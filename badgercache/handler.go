@@ -142,7 +142,9 @@ func New(config *Config) (*Cache, error) {
 }
 
 func (c *Cache) Get(key string) (resp []byte, ok bool) {
-	c.mu.Lock()
+	c.mu.RLock()
+	// defer c.mu.RUnlock()
+
 	err := c.db.View(func(txn *badger.Txn) error {
 		item, err := txn.Get([]byte(key))
 		if err != nil {
@@ -177,8 +179,6 @@ func (c *Cache) Get(key string) (resp []byte, ok bool) {
 		return nil
 	})
 
-	c.mu.Unlock()
-
 	if c.debug {
 		log.WithFields(log.Fields{
 			// "resp": string(resp),
@@ -186,12 +186,15 @@ func (c *Cache) Get(key string) (resp []byte, ok bool) {
 			"ok":  err == nil,
 		}).Info("badgercache.Get()")
 	}
+	c.mu.RUnlock()
 	return resp, err == nil
 }
 
 // Set stores a response to the cache at the given key.
 func (c *Cache) Set(key string, resp []byte) {
 	c.mu.Lock()
+	// defer c.mu.Unlock()
+
 	err := c.db.Update(func(txn *badger.Txn) error {
 		if c.compress {
 			var err error
@@ -209,6 +212,7 @@ func (c *Cache) Set(key string, resp []byte) {
 		return err
 	})
 	c.mu.Unlock()
+
 	if c.debug {
 		log.WithFields(log.Fields{
 			"key": key,
@@ -220,6 +224,8 @@ func (c *Cache) Set(key string, resp []byte) {
 
 func (c *Cache) Delete(key string) {
 	c.mu.Lock()
+	// defer c.mu.Unlock()
+
 	err := c.db.Update(func(txn *badger.Txn) error {
 		err := txn.Delete([]byte(key))
 		if c.debug && err != nil {
